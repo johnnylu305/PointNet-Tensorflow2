@@ -1,8 +1,7 @@
-# An unofficial [PoinetNet](https://arxiv.org/abs/1612.00593).
+# An unofficial PoinetNet
 This is an unofficial PointNet with Tensorflow2.
 
 ## Performance on ModelNet40 classification dataset
-- [https://shapenet.cs.stanford.edu/media/modelnet40_ply_hdf5_2048.zip)
 
 | set      | Accuracy      |
 | :---:    | :---:    |
