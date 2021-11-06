@@ -26,13 +26,17 @@ This is an unofficial PointNet with Tensorflow2.
 
 
 ## For training
-
+```
+cd ./Classification
+```
 ```
 python main.py
 ```
 
 ## For testing
-
+```
+cd ./Classification
+```
 ```
 python main.py --phase='test'
 ```
