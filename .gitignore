@@ -1,0 +1,17 @@
+Classification/checkpoints/*
+Classification/dataset/data/*
+Classification/logs/*
+Classification/vis/*
+Toy/Classification/checkpoints/*
+Toy/Classification/dataset/*
+Toy/Classification/logs/*
+Toy/Classification/vis/*
+
+!Classification/checkpoints/README
+!Classification/logs/README
+!Classification/dataset/data/README
+!Classification/vis/README
+!Toy/Classification/checkpoints/README
+!Toy/Classification/logs/README
+!Toy/Classification/dataset/README
+!Toy/Classification/vis/README
