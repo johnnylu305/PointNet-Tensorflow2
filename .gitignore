@@ -2,6 +2,10 @@ Classification/checkpoints/*
 Classification/dataset/data/*
 Classification/logs/*
 Classification/vis/*
+PartSeg/checkpoints/*
+PartSeg/dataset/data/*
+PartSeg/logs/*
+PartSeg/vis/*
 Toy/Classification/checkpoints/*
 Toy/Classification/dataset/*
 Toy/Classification/logs/*
@@ -15,3 +19,7 @@ Toy/Classification/vis/*
 !Toy/Classification/logs/README
 !Toy/Classification/dataset/README
 !Toy/Classification/vis/README
+!PartSeg/checkpoints/README
+!PartSeg/dataset/data/README
+!PartSeg/logs/README
+!PartSeg/vis/README

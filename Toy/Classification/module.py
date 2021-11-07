@@ -11,7 +11,7 @@ class Transform_Net(layers.Layer):
         # trans: [matrix_size]
         net_para = []
         if 'Tnet_1' in name:
-            net_para = [['{}_reshape1'.format(name), [1024, 3, 1]],
+            net_para = [['{}_reshape1'.format(name), [-1, 3, 1]],
                         ['{}_conv2d_1'.format(name), [64, (1, 3), (1, 1), 'valid', 'relu', True]],
                         ['{}_conv2d_2'.format(name), [128, (1, 1), (1, 1), 'valid', 'relu', True]],
                         ['{}_conv2d_3'.format(name), [1024, (1, 1), (1, 1), 'valid', 'relu', True]],
@@ -132,7 +132,7 @@ class matrix_multi(layers.Layer):
 
     def call(self, x):
         x = self.model(x)
-        x = x#+get_eye(x)
+        x = x
         return x
 
 
@@ -162,8 +162,3 @@ class pooling(layers.Layer):
 def eye_init(shape, dtype=tf.float32):
     assert len(shape)==1
     return tf.Variable(np.eye(int(shape[0]**0.5)).flatten(), dtype=dtype)
-
-
-#def get_eye(x, dtype=tf.float32):
-    #assert len(shape)==1
-#    return tf.constant(np.eye(int(x.shape[1]**0.5)).flatten(), dtype=dtype)

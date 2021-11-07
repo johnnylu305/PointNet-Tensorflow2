@@ -5,7 +5,7 @@ This is an unofficial PointNet with Tensorflow2.
 
 | set      | Accuracy      |
 | :---:    | :---:    |
-| test    |0.0         | 
+| test    |88.0~89.0         | 
 
 ## My Environment
 - Operating System:
