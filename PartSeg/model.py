@@ -10,17 +10,16 @@ class Part_Segmentation(layers.Layer):
         
         # define hyperparameter
         lr_schedule = lr_decay(lr,
-                               decay_steps=6250,
-                               decay_rate=0.7,
+                               decay_steps=10550,
+                               decay_rate=0.5,
                                staircase=True,
                                clip=0.00001)
         self.bn_decay = bn_decay(momentum=0.5, 
-                                 decay_steps=6250*2, 
+                                 decay_steps=10550*2, 
                                  decay_rate=0.5, 
                                  staircase=True, 
                                  clip=0.99)
         self.opt = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
-
         # define neural network
         # Tnet: [K]
         # conv2d: [filters, kernel, stride, padding, activation, batch norm]
@@ -50,7 +49,7 @@ class Part_Segmentation(layers.Layer):
                          ['{}_conv2d_1'.format(name), [256, (1, 1), (1, 1), 'valid', 'relu', True, 0.2]],
                          ['{}_conv2d_2'.format(name), [256, (1, 1), (1, 1), 'valid', 'relu', True, 0.2]],
                          ['{}_conv2d_3'.format(name), [128, (1, 1), (1, 1), 'valid', 'relu', True, None]],
-                         ['{}_conv2d_4'.format(name), [50, (1, 1), (1, 1), 'valid', 'relu', None, None]],
+                         ['{}_conv2d_4'.format(name), [50, (1, 1), (1, 1), 'valid', None, None, None]],
                          ['{}_reshape3'.format(name), [-1, 50]], 
                          ['{}_softmax'.format(name), ['softmax']]]
 
@@ -128,7 +127,6 @@ class Part_Segmentation(layers.Layer):
         return seg_loss+alpha*l2_norm
 
     def accuracy(self, pred, label):
-        pred = tf.argmax(pred, 2)
         correct_predictions = tf.equal(pred, label)
-        acc = tf.reduce_mean(tf.cast(correct_predictions, tf.float32), axis=1)
+        acc = tf.reduce_mean(tf.cast(correct_predictions, tf.float32))
         return acc

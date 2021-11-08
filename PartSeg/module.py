@@ -17,14 +17,13 @@ class Transform_Net(layers.Layer):
                         ['{}_conv2d_3'.format(name), [1024, (1, 1), (1, 1), 'valid', 'relu', True, None]],
                         ['{}_pooling1'.format(name), ['GlobalMaxPooling2D']],
                         ['{}_reshape2'.format(name), [-1]],
-                        ['{}_dense_1'.format(name), [512, 'relu', True, None]],
-                        ['{}_dense_2'.format(name), [256, 'relu', True, None]],
+                        ['{}_dense_1'.format(name), [128, 'relu', True, None]],
+                        ['{}_dense_2'.format(name), [128, 'relu', True, None]],
                         ['{}_matrix_1'.format(name), [K]],
                         ['{}_reshape3'.format(name), [K, K]]]
         elif 'Tnet_2' in name:
-            net_para = [['{}_conv2d_1'.format(name), [64, (1, 1), (1, 1), 'valid', 'relu', True, None]],
-                        ['{}_conv2d_2'.format(name), [128, (1, 1), (1, 1), 'valid', 'relu', True, None]],
-                        ['{}_conv2d_3'.format(name), [1024, (1, 1), (1, 1), 'valid', 'relu', True, None]],
+            net_para = [['{}_conv2d_1'.format(name), [256, (1, 1), (1, 1), 'valid', 'relu', True, None]],
+                        ['{}_conv2d_2'.format(name), [1024, (1, 1), (1, 1), 'valid', 'relu', True, None]],
                         ['{}_pooling1'.format(name), ['GlobalMaxPooling2D']],
                         ['{}_reshape2'.format(name), [-1]],
                         ['{}_dense_1'.format(name), [512, 'relu', True, None]],

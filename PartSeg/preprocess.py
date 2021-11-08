@@ -3,6 +3,7 @@ import os
 import glob
 import h5py
 import json
+from mapping import strToCatid, catidToName, nameToParts
 
 
 def get_data(args):
@@ -65,6 +66,45 @@ def get_data(args):
             test_seg[start:end] = seg
             start = end
         return test_x, test_y, test_seg
+
+# Reference: charlesq34/pointnet
+def get_org_data(args):
+    path = args.dataset_dir
+    # load test set
+    print("Load test set")
+    path = os.path.join(path, "data")
+    # number of shape
+    size = 2048+826
+    test_x = np.zeros((size, args.max_size, 3))
+    test_y = np.zeros((size, 1))
+    test_seg = []
+    test_size = np.zeros((size, 1))
+    with open(os.path.join(path, "testing_ply_file_list.txt")) as r:
+        for i, f in enumerate(r):
+            x_path, seg_label_path, cls_label = f.split(" ")
+            x_path = os.path.join(path, "shapenetcore_partanno_v0", "PartAnnotation", x_path)
+            seg_label_path = os.path.join(path, "shapenetcore_partanno_v0", "PartAnnotation", seg_label_path)
+            # get class label
+            test_y[i][0] = int(strToCatid[cls_label.rstrip()])
+            # get point cloud
+            with open(x_path, 'r') as rr:
+                pts_str = [item.rstrip() for item in rr.readlines()]
+                pts = np.array([np.float32(s.split()) for s in pts_str], dtype=np.float32)
+            # zero-mean and normalized into an unit sphere.
+            centroid = np.mean(pts, axis=0)
+            pts = pts - centroid
+            pts = pts/np.max(np.sqrt(np.sum(pts**2, axis=1)))
+            # get # of points
+            test_size[i][0] = pts.shape[0]
+            # padding
+            while pts.shape[0]<args.max_size:
+                pts = np.concatenate((pts, pts), axis=0)
+            test_x[i] = pts[:args.max_size]
+            # get segmentation label
+            with open(seg_label_path, 'r') as rr:
+                part = np.array([int(item.rstrip()) for item in rr.readlines()], dtype=np.uint8)
+                test_seg.append(np.array([nameToParts[catidToName[test_y[i][0]]][x-1] for x in part])[:args.max_size])
+    return test_x, test_y, test_seg, test_size
 
 
 def load_point_clouds(path):

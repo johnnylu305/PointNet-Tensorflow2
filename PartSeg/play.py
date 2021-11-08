@@ -1,6 +1,6 @@
 import argparse
 import os
-#os.environ['CUDA_VISIBLE_DEVICES'] = ""
+os.environ['CUDA_VISIBLE_DEVICES'] = ""
 import tensorflow as tf
 import numpy as np
 import datetime
@@ -13,7 +13,7 @@ from miou import mIoU
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--dataset_dir', dest='dataset_dir', default='./dataset/', help='path of the dataset')
-parser.add_argument('--type', dest='type', default='part_segmentation', help='part_segmentation')
+parser.add_argument('--type', dest='type', default='classification', help='classification')
 parser.add_argument('--phase', dest='phase', default='train', help='train or test')
 parser.add_argument('--sample', dest='sampling', type=int, default=2048, help='# of sampling for each point cloud')
 parser.add_argument('--lr', dest='lr', type=float, default=0.001, help='initial learning rate for adam')
@@ -34,7 +34,7 @@ def train(model, x, cls_label, seg_label):
     # get optimizer
     optimizer = model.opt
     # sample and shuffle
-    x, cls_label, seg_label = shuffle(x, cls_label, seg_label)
+    x, cls_label, seg_label = shuffle(x[:, :args.sampling, :], cls_label, seg_label)
     dataset_size = len(x)
     iteration = int(np.ceil(dataset_size/args.batch_size))
     loss = []
@@ -64,15 +64,14 @@ def test(model, x, cls_label, seg_label, name=None):
         # divisible or non divisible
         end = start+args.batch_size if i!=iteration-1 else dataset_size
         pred, matrix = model(x[start:end], cls_label[start:end], training=False)
-        pred = np.argmax(pred.numpy(), 2)
         acc.append(model.accuracy(pred, seg_label[start:end]).numpy()*(end-start))
-        miou_obj.compute(pred, seg_label[start:end], cls_label[start:end], end-start)
+        miou_obj.compute(pred.numpy(), seg_label[start:end], cls_label[start:end], end-start)
         if args.vis:
             model_dir = "{}_{}".format(args.type, TIME)
-            vis.visualize(x[start:end],
-                          seg_label[start:end],
-                          cls_label[start:end],
-                          pred,
+            vis.visualize(x[start:end], 
+                          seg_label[start:end], 
+                          cls_label[start:end], 
+                          pred, 
                           end-start)
     cat_iou, cat_miou, total_miou = miou_obj.get_iou()
     return np.sum(acc)/dataset_size, cat_iou, cat_miou, total_miou
@@ -104,10 +103,6 @@ if __name__=="__main__":
     if args.phase=='train':
         # load dataset
         train_x, train_y, train_seg, val_x, val_y, val_seg = get_data(args)
-        train_x = train_x[:, :args.sampling, :]
-        train_seg = train_seg[:, :args.sampling]
-        val_x = val_x[:, :args.sampling, :]
-        val_seg = val_seg[:, :args.sampling]
         # load model
         model = Part_Segmentation(args.type, args.lr, args.sampling)
         # initial epoch
@@ -143,8 +138,6 @@ if __name__=="__main__":
     elif args.phase=='test':
         # load test set
         test_x, test_y, test_seg = get_data(args)
-        test_x = test_x[:, :args.sampling]
-        test_seg = test_seg[:, :args.sampling]
         # load model
         model = Part_Segmentation(args.type, args.lr, args.sampling)
         # get saver
