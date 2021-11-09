@@ -1,6 +1,6 @@
 import argparse
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = ""
+#os.environ['CUDA_VISIBLE_DEVICES'] = ""
 import tensorflow as tf
 import numpy as np
 import datetime
@@ -13,13 +13,13 @@ from miou import mIoU
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--dataset_dir', dest='dataset_dir', default='./dataset/', help='path of the dataset')
-parser.add_argument('--type', dest='type', default='classification', help='classification')
+parser.add_argument('--type', dest='type', default='part_segmentation', help='part_segmentation')
 parser.add_argument('--phase', dest='phase', default='train', help='train or test')
 parser.add_argument('--sample', dest='sampling', type=int, default=2048, help='# of sampling for each point cloud')
 parser.add_argument('--lr', dest='lr', type=float, default=0.001, help='initial learning rate for adam')
 parser.add_argument('--alpha', dest='alpha', type=float, default=0.001, help='weight for regularization loss')
 parser.add_argument('--batch_size', dest='batch_size', type=int, default=32, help='# point cloud in batch')
-parser.add_argument('--epoch', dest='epoch', type=int, default=250, help='# epoch')
+parser.add_argument('--epoch', dest='epoch', type=int, default=10, help='# epoch')
 parser.add_argument('--save_dir', dest='save_dir', default='./checkpoints/', help='path of the checkpoints')
 parser.add_argument('--load_dir', dest='load_dir', default='./checkpoints/', help='path of the checkpoints')
 parser.add_argument('--log_dir', dest='log_dir', default='./logs/', help='path of the logs')
@@ -34,7 +34,7 @@ def train(model, x, cls_label, seg_label):
     # get optimizer
     optimizer = model.opt
     # sample and shuffle
-    x, cls_label, seg_label = shuffle(x[:, :args.sampling, :], cls_label, seg_label)
+    x, cls_label, seg_label = shuffle(x, cls_label, seg_label)
     dataset_size = len(x)
     iteration = int(np.ceil(dataset_size/args.batch_size))
     loss = []
@@ -55,7 +55,7 @@ def test(model, x, cls_label, seg_label, name=None):
     dataset_size = len(x)
     iteration = int(np.ceil(dataset_size/args.batch_size))
     acc = []
-    miou_obj = mIoU(16)
+    miou_obj = mIoU(1)
     if args.vis:
         model_dir = "{}_{}".format(args.type, TIME)
         vis = Vis(os.path.join(args.vis_dir, model_dir))
@@ -64,14 +64,14 @@ def test(model, x, cls_label, seg_label, name=None):
         # divisible or non divisible
         end = start+args.batch_size if i!=iteration-1 else dataset_size
         pred, matrix = model(x[start:end], cls_label[start:end], training=False)
+        pred = np.argmax(pred.numpy(), 2)
         acc.append(model.accuracy(pred, seg_label[start:end]).numpy()*(end-start))
-        miou_obj.compute(pred.numpy(), seg_label[start:end], cls_label[start:end], end-start)
+        miou_obj.compute(pred, seg_label[start:end], cls_label[start:end], end-start)
         if args.vis:
             model_dir = "{}_{}".format(args.type, TIME)
-            vis.visualize(x[start:end], 
-                          seg_label[start:end], 
-                          cls_label[start:end], 
-                          pred, 
+            vis.visualize(x[start:end],
+                          cls_label[start:end],
+                          pred,
                           end-start)
     cat_iou, cat_miou, total_miou = miou_obj.get_iou()
     return np.sum(acc)/dataset_size, cat_iou, cat_miou, total_miou
@@ -139,7 +139,7 @@ if __name__=="__main__":
         # load test set
         test_x, test_y, test_seg = get_data(args)
         # load model
-        model = Part_Segmentation(args.type, args.lr, args.sampling)
+        model = Part_Segmentation(args.type, args.lr, 2048*2)
         # get saver
         saver, saver_manager = get_saver(model)
         # load weight to test

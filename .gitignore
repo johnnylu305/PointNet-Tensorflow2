@@ -10,6 +10,10 @@ Toy/Classification/checkpoints/*
 Toy/Classification/dataset/*
 Toy/Classification/logs/*
 Toy/Classification/vis/*
+Toy/PartSeg/checkpoints/*
+Toy/PartSeg/dataset/*
+Toy/PartSeg/logs/*
+Toy/PartSeg/vis/*
 
 !Classification/checkpoints/README
 !Classification/logs/README
@@ -23,3 +27,7 @@ Toy/Classification/vis/*
 !PartSeg/dataset/data/README
 !PartSeg/logs/README
 !PartSeg/vis/README
+!Toy/PartSeg/checkpoints/README
+!Toy/PartSeg/dataset/README
+!Toy/PartSeg/logs/README
+!Toy/PartSeg/vis/README
