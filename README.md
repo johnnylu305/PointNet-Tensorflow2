@@ -165,9 +165,7 @@ cd ./Toy/PartSeg
 ```
 python main.py --phase='test' --vis=1
 ```
-```
-python test_all.py --vis=1
-```
+
 
 ## Part Segmentation Sample Results from Saturn and ShapeNet
 ![alt text](https://github.com/johnnylu305/Pointnet-Tensorflow-2/blob/main/Figures/Airplane_35.png?raw=true)
