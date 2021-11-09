@@ -11,7 +11,7 @@ This is an unofficial PointNet with Tensorflow2.
 
 | mIOU | Airplane | Bag| Cap|Car|Chair|Earphone|Guitar|Knife|Lamp|Laptop|Motorbike|Mug|Pistol|Rocket|Skateboard|Table
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
-| 83.7 |  82.1 | 82.3 | 82.0| 75.7 |89.7| 69.1| 91.4| 86.0| 80.7| 94.7| 66.8| 92.7| 82.4| 54.7| 72.3| 80.9| 
+| 83.5 |  82.0 | 82.7 | 82.3| 75.5 |89.7| 69.3| 91.3| 86.0| 80.6| 94.7| 66.0| 91.7| 82.2| 54.2| 72.3| 80.6| 
 
 ## Performance on Saturn multi-label classification dataset
 
