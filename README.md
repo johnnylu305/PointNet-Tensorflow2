@@ -151,19 +151,12 @@ cd ./Toy/PartSeg
 python main.py
 ```
 
-## For testing (sample)
+## For testing 
 ```
 cd ./Toy/PartSeg
 ```
 ```
 python main.py --phase='test'
-```
-## For testing (original)
-```
-cd ./Toy/PartSeg
-```
-```
-python test_all.py
 ```
 ## For visualization
 ```
