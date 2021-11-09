@@ -5,7 +5,25 @@ This is an unofficial PointNet with Tensorflow2.
 
 | set      | Accuracy      |
 | :---:    | :---:    |
-| test    |88.0~89.0         | 
+| test    |88+         | 
+
+## Performance on ShapeNet part segmentation dataset
+
+| mIOU | Airplane | Bag| Cap|Car|Chair|Earphone|Guitar|Knife|Lamp|Laptop|Motorbike|Mug|Pistol|Rocket|Skateboard|Table
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
+| 83.7 |  82.1 | 82.3 | 82.0| 75.7 |89.7| 69.1| 91.4| 86.0| 80.7| 94.7| 66.8| 92.7| 82.4| 54.7| 72.3| 80.9| 
+
+## Performance on Saturn multi-label classification dataset
+
+| set      | Accuracy      |
+| :---:    | :---:    |
+| test    |100         | 
+
+## Performance on Saturn part segmentation dataset
+
+| set      | Accuracy      |
+| :---:    | :---:    |
+| test    |100         | 
 
 ## My Environment
 - Operating System:
@@ -23,6 +41,8 @@ This is an unofficial PointNet with Tensorflow2.
 
 ## Downloading the ModelNet40 Classification Dataset
 [ModelNet40](https://shapenet.cs.stanford.edu/media/modelnet40_ply_hdf5_2048.zip)
+## Downloading the Pretrain Model
+[Model](https://drive.google.com/drive/u/2/folders/1n_sgQsFyKiMMZ-0MZ1XMP5mSmS_et9CU)
 
 
 ## For training
@@ -40,6 +60,122 @@ cd ./Classification
 ```
 python main.py --phase='test'
 ```
+## For visualization
+```
+cd ./Classification
+```
+```
+python main.py --phase='test' --vis=1
+```
+
+## Downloading the ShapeNet Part Segmentation Dataset
+[ShapeNet-Org](https://shapenet.cs.stanford.edu/ericyi/shapenetcore_partanno_v0.zip)
+[ShapeNet-h5](https://shapenet.cs.stanford.edu/media/shapenet_part_seg_hdf5_data.zip)
+
+## Downloading the Pretrain Model
+[Model](https://drive.google.com/drive/u/2/folders/1pK490CRc3kbJ01US-xt_dLNUVpkjJYCp)
+
+## For training
+```
+cd ./PartSeg
+```
+```
+python main.py
+```
+
+## For testing (sample)
+```
+cd ./PartSeg
+```
+```
+python main.py --phase='test'
+```
+## For testing (original)
+```
+cd ./PartSeg
+```
+```
+python test_all.py
+```
+## For visualization
+```
+cd ./PartSeg
+```
+```
+python main.py --phase='test' --vis=1
+```
+```
+python test_all.py --vis=1
+```
+
+## Downloading the Saturn Multi-label Classification Dataset
+[Saturn](https://drive.google.com/drive/u/2/folders/1gVkqTfjYX34Ul6iGxQ0i3SZZd338yPNP)
+
+## Downloading the Pretrain Model
+[Model](https://drive.google.com/drive/u/2/folders/1gVkqTfjYX34Ul6iGxQ0i3SZZd338yPNP)
+
+## For training
+```
+cd ./Toy/Classification
+```
+```
+python main.py
+```
+
+## For testing
+```
+cd ./Toy/Classification
+```
+```
+python main.py --phase='test'
+```
+## For visualization
+```
+cd ./Toy/Classification
+```
+```
+python main.py --phase='test' --vis=1
+```
+
+## Downloading the Saturn Part Segmentation Dataset
+[Saturn](https://drive.google.com/drive/u/2/folders/1cKCUERmJrSbexCgpucXJs5S7EbUBe0A2)
+
+## Downloading the Pretrain Model
+[Model](https://drive.google.com/drive/u/2/folders/1cKCUERmJrSbexCgpucXJs5S7EbUBe0A2)
+
+## For training
+```
+cd ./Toy/PartSeg
+```
+```
+python main.py
+```
+
+## For testing (sample)
+```
+cd ./Toy/PartSeg
+```
+```
+python main.py --phase='test'
+```
+## For testing (original)
+```
+cd ./Toy/PartSeg
+```
+```
+python test_all.py
+```
+## For visualization
+```
+cd ./Toy/PartSeg
+```
+```
+python main.py --phase='test' --vis=1
+```
+```
+python test_all.py --vis=1
+```
+
 
 ## References
 
