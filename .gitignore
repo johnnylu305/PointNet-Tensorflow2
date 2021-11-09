@@ -22,6 +22,7 @@ Toy/PartSeg/vis/*
 !Toy/Classification/checkpoints/README
 !Toy/Classification/logs/README
 !Toy/Classification/dataset/README
+!Toy/Classification/dataset/pointCloudGenCla.py 
 !Toy/Classification/vis/README
 !PartSeg/checkpoints/README
 !PartSeg/dataset/data/README
@@ -29,5 +30,6 @@ Toy/PartSeg/vis/*
 !PartSeg/vis/README
 !Toy/PartSeg/checkpoints/README
 !Toy/PartSeg/dataset/README
+!Toy/PartSeg/dataset/pointCloudGenSem.py
 !Toy/PartSeg/logs/README
 !Toy/PartSeg/vis/README

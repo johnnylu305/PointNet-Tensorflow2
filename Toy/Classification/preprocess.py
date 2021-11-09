@@ -70,7 +70,7 @@ def get_data(args):
             # zero-mean and normalized into an unit sphere.
             centroid = np.mean(point_cloud_np, axis=0)
             point_cloud_np = point_cloud_np - centroid
-            train_x[i] = point_cloud_np/np.max(np.sqrt(np.sum(point_cloud_np**2, axis=1)))
+            test_x[i] = point_cloud_np/np.max(np.sqrt(np.sum(point_cloud_np**2, axis=1)))
             for color in np.unique(np.array(point_cloud.colors), axis=0):
                 test_y[i, saturn_color_map[tuple(color)]] = 1
         return test_x, test_y, test_name
