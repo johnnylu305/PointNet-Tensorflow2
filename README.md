@@ -42,7 +42,7 @@ This is an unofficial PointNet with Tensorflow2.
 ## Downloading the ModelNet40 Classification Dataset
 [ModelNet40](https://shapenet.cs.stanford.edu/media/modelnet40_ply_hdf5_2048.zip)
 ## Downloading the Pretrain Model
-[Model](https://drive.google.com/drive/u/2/folders/1n_sgQsFyKiMMZ-0MZ1XMP5mSmS_et9CU)
+[Model](https://drive.google.com/drive/folders/1bK_TWXjNNesgYNCW0gMx3AxzWZr_Au3c?usp=sharing)
 
 
 ## For training
@@ -73,7 +73,7 @@ python main.py --phase='test' --vis=1
 [ShapeNet-h5](https://shapenet.cs.stanford.edu/media/shapenet_part_seg_hdf5_data.zip)
 
 ## Downloading the Pretrain Model
-[Model](https://drive.google.com/drive/u/2/folders/1pK490CRc3kbJ01US-xt_dLNUVpkjJYCp)
+[Model](https://drive.google.com/drive/folders/1bGdAwMONU626XX4S2w2RhMXwNNyt4_tH?usp=sharing)
 
 ## For training
 ```
@@ -109,10 +109,10 @@ python test_all.py --vis=1
 ```
 
 ## Downloading the Saturn Multi-label Classification Dataset
-[Saturn](https://drive.google.com/drive/u/2/folders/1gVkqTfjYX34Ul6iGxQ0i3SZZd338yPNP)
+[Saturn](https://drive.google.com/drive/folders/1bGMcq0xPxbkwUSEaPPSrdM1omkG9lSDS?usp=sharing)
 
 ## Downloading the Pretrain Model
-[Model](https://drive.google.com/drive/u/2/folders/1gVkqTfjYX34Ul6iGxQ0i3SZZd338yPNP)
+[Model](https://drive.google.com/drive/folders/1bGMcq0xPxbkwUSEaPPSrdM1omkG9lSDS?usp=sharing)
 
 ## For training
 ```
@@ -138,10 +138,10 @@ python main.py --phase='test' --vis=1
 ```
 
 ## Downloading the Saturn Part Segmentation Dataset
-[Saturn](https://drive.google.com/drive/u/2/folders/1cKCUERmJrSbexCgpucXJs5S7EbUBe0A2)
+[Saturn](https://drive.google.com/drive/folders/1bHkXgSlOO-H2vjdydDkisYmxtEfWxYvV?usp=sharing)
 
 ## Downloading the Pretrain Model
-[Model](https://drive.google.com/drive/u/2/folders/1cKCUERmJrSbexCgpucXJs5S7EbUBe0A2)
+[Model](https://drive.google.com/drive/folders/1bHkXgSlOO-H2vjdydDkisYmxtEfWxYvV?usp=sharing)
 
 ## For training
 ```
